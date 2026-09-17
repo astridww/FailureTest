@@ -1,7 +1,7 @@
 import Product from "../models/Product.js";
 import Category from "../models/Category.js";
 import { generateUniqueBarcode } from "../services/barcodeService.js";
-import { createNotifications } from "./notificationController.js";
+import { createNotification } from "./notificationController.js";
 import { sendCriticalStockAlert, sendOutOfStockAlert } from "../services/emailService.js";
 import Settings from "../models/Settings.js";
 
@@ -283,7 +283,7 @@ export const createProduct = async (req, res, next) => {
       stockZeroAt: stock === 0 ? new Date() : null,
     });
 
-    res.status(product).json(product);
+    res.status(200).json(product);
   } catch (error) {
     if (error.code === 11000) {
       res.status(409);
